@@ -1,0 +1,20 @@
+language: python
+python:
+  - "2.6"
+  - "2.7"
+  - "3.5"
+notifications:
+  email: false
+  irc: "chat.freenode.net#s3cmd"
+# command to install dependencies
+cache:
+    directories:
+        - $HOME/cache
+install:
+  - pip install .
+# command to prepare tests
+before_install:
+  - mkdir -p $HOME/cache
+  - [ ! -e $HOME/cache/minio ] && wget -o $HOME/cache/minio https://dl.minio.io/server/minio/release/linux-amd64/minio
+# command to run tests
+script: ls $HOME/cache
