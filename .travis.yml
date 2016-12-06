@@ -26,6 +26,6 @@ before_script:
   - "sh -c $HOME/cache/minio server $HOME/minio_tmp&"
   - sleep 3 # give minio some time to start
 # command to run tests
-script: ls $HOME/cache
+script: ./s3cmd -c .travis.s3cfg ls
 after_script:
   - killall minio
