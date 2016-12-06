@@ -15,7 +15,7 @@ install:
 # command to prepare tests
 before_install:
   - mkdir -p $HOME/cache
-  - test ! -e $HOME/cache/minio && wget -o $HOME/cache/minio https://dl.minio.io/server/minio/release/linux-amd64/minio || echo "Minio already in cache"
+  - test ! -e $HOME/cache/minio && wget -O $HOME/cache/minio https://dl.minio.io/server/minio/release/linux-amd64/minio || echo "Minio already in cache"
   - mkdir -p $HOME/minio_tmp
 # Start a local instance of minio
 before_script:
