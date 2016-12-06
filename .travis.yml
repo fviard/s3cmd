@@ -15,6 +15,15 @@ install:
 # command to prepare tests
 before_install:
   - mkdir -p $HOME/cache
-  - test ! -e $HOME/cache/minio && wget -o $HOME/cache/minio https://dl.minio.io/server/minio/release/linux-amd64/minio
+  - test ! -e $HOME/cache/minio && wget -o $HOME/cache/minio https://dl.minio.io/server/minio/release/linux-amd64/minio || echo "Minio already in cache"
+  - mkdir -p $HOME/minio_tmp
+# Start a local instance of minio
+before_script:
+  - "export AWS_ACCESS_KEY_ID=Q3AM3UQ867SPQQA43P2F",
+  - "export AWS_SECRET_ACCESS_KEY=zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG"
+  - "sh -c $HOME/cache/minio server $HOME/minio_tmp&"
+  - sleep 3 # give minio some time to start
 # command to run tests
 script: ls $HOME/cache
+after_script:
+  - killall minio
